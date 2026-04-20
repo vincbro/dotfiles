@@ -1,0 +1,8 @@
+font-family = Iosevka Term
+font-size = 24
+theme = Vague
+macos-option-as-alt = left
+# background-blur = macos-glass-regular
+# background-opacity = 0.0
+mouse-hide-while-typing = true
+macos-titlebar-style = hidden

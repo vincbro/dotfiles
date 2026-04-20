@@ -1,0 +1,71 @@
+[[language]]
+name = "c-sharp"
+scope = "source.cs"
+injection-regex = "cs"
+file-types = ["cs"]
+language-servers = ["csharp-ls"]
+
+[[language]]
+name = "razor"
+scope = "source.razor"
+injection-regex = "razor"
+file-types = ["razor"]
+language-servers = ["razor"]
+
+[language-server.razor]
+command = "rzls"
+
+[[language]]
+name = "rust"
+auto-format = true
+
+[language-server.rust-analyzer.config]
+cargo = { features = "all" }
+check = { command = "clippy", features = "all" }
+
+[[language]]
+name = "markdown"
+language-servers = [ "markdown-oxide" ]
+
+[language-server.markdown-oxide]
+command = "markdown-oxide"
+
+[[language]]
+name = "tsx"
+language-servers = [ "eslint", "emmet-ls", "typescript-language-server", "tailwindcss-ls" ]
+formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
+auto-format = true
+
+[[language]]
+name = "typescript"
+language-servers = [ "eslint", "emmet-ls", "typescript-language-server", "tailwindcss-ls" ]
+formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
+auto-format = true
+
+[[language]]
+name = "nix"
+file-types = ["nix"]
+indent = { tab-width = 4, unit = "    " }
+language-servers = ["nil"]
+formatter = { command = "nixfmt" }
+
+[[language]]
+name = "typst"
+language-servers = ["tinymist"]
+
+[language-server.tinymist]
+command = "tinymist"
+
+[language-server.basedpyright]
+command = "basedpyright-langserver" 
+args = ["--stdio"]
+config = { basedpyright = { analysis = { typeCheckingMode = "standard", autoSearchPaths = true, useLibraryCodeForTypes = true } } }
+
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+
+[[language]]
+name = "python"
+roots = ["pyproject.toml", ".git"]
+language-servers = [ "basedpyright", "ruff" ]
