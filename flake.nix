@@ -1,4 +1,3 @@
-
 {
   description = "Dotfiles Devshell";
 
@@ -21,9 +20,13 @@
 		pkgs.nil
 		pkgs.lua-language-server
 		pkgs.cargo
+		pkgs.rustc
+		pkgs.libiconv
+		pkgs.pkg-config
           ];
 
           buildInputs = [
+            pkgs.apple-sdk
           ];
 
           shellHook = ''
