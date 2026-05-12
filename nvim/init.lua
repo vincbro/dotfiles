@@ -53,8 +53,15 @@ vim.pack.add({
 local _99 = require("99")
 _99.setup({
 	provider = _99.Providers.GeminiCLIProvider,
-	model = "gemini-3.1-pro-preview",
-	tmp_dir = "./.tmp"
+	-- model = "gemini-3.1-pro-preview",
+	model = "auto",
+	tmp_dir = "./.tmp",
+	completion = {
+		custom_rules = {
+			vim.fn.expand("~/Documents/skills/"),
+		},
+	}
+
 })
 vim.keymap.set("v", "<leader>q", function()
 	_99.visual({})
