@@ -1,5 +1,5 @@
-font-family = Iosevka Term
-font-size = 25 
+font-family = Menlo 
+font-size = 22 
 theme = Vague
 macos-option-as-alt = left
 mouse-hide-while-typing = true

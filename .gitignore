@@ -1,3 +1,5 @@
-.direnv/
-helix/runtime
-raycast
+/.direnv
+/helix/runtime
+/raycast
+/.tmp
+.zshrc

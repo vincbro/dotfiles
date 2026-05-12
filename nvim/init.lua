@@ -1,4 +1,5 @@
--- Settings vim.opt.winborder = "none" vim.opt.tabstop = 4
+vim.opt.winborder = "none"
+vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.showtabline = 4
 vim.opt.signcolumn = "yes"
@@ -12,45 +13,83 @@ vim.o.relativenumber = true
 vim.g.mapleader = " "
 vim.cmd([[hi @lsp.type.number gui=bold]])
 
--- Packages
 vim.pack.add({
+	-- UI & Theme
 	{ src = "https://github.com/vague-theme/vague.nvim" },
-	{ src = "https://github.com/neovim/nvim-lspconfig" },
-	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
+	{ src = "https://github.com/akinsho/bufferline.nvim" },
+	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
+
+	-- Navigation
+	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
-	{ src = "https://github.com/nvim-lua/plenary.nvim" },
-	{ src = "https://github.com/folke/which-key.nvim" },
-	{ src = "https://github.com/akinsho/bufferline.nvim" },
+
+	-- LSP & Completion
+	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	{ src = "https://github.com/Saghen/blink.cmp",                         version = vim.version.range("*") },
 	{ src = "https://github.com/aznhe21/actions-preview.nvim" },
-	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
+
+	-- Syntax & Highlighting
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
+	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
+
+	-- Editing & Keymaps
+	{ src = "https://github.com/folke/which-key.nvim" },
 	{ src = "https://github.com/nvim-mini/mini.surround" },
 	{ src = "https://github.com/nvim-mini/mini.pairs" },
-	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
-	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+
+	-- Git
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
-	{ src = "https://github.com/Saghen/blink.cmp",                         version = vim.version.range("*") },
+
+	-- Utilities
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{ src = "https://github.com/ThePrimeagen/99" },
+	{ src = "https://github.com/folke/persistence.nvim" },
 })
 
-require("actions-preview").setup({
-	telescope = {
-		sorting_strategy = "ascending",
-		layout_strategy = "vertical",
-		layout_config = {
-			width = 0.8,
-			height = 0.9,
-			prompt_position = "top",
-			preview_cutoff = 20,
-			preview_height = function(_, _, max_lines)
-				return max_lines - 15
-			end,
-		},
-	},
+
+-- 99
+local _99 = require("99")
+_99.setup({
+	provider = _99.Providers.GeminiCLIProvider,
+	model = "gemini-3.1-pro-preview",
+	tmp_dir = "./.tmp"
+})
+vim.keymap.set("v", "<leader>q", function()
+	_99.visual({})
+end, { desc = 'Query 99' })
+vim.keymap.set({ "n", "v" }, "<leader>9x", function()
+	_99.stop_all_requests()
+end, { desc = 'Kill all 99 requests' })
+vim.keymap.set("n", "<leader>9s", function()
+	_99.search({})
+end, { desc = 'Search 99' })
+
+-- Persistence
+local persistence = require("persistence")
+persistence.setup()
+vim.keymap.set("n", "<leader>ss", function() persistence.load() end, { desc = "Restore Session" })
+vim.keymap.set("n", "<leader>sl", function() persistence.load({ last = true }) end,
+	{ desc = "Restore Last Session" })
+vim.keymap.set("n", "<leader>sd", function() persistence.stop() end, { desc = "Don't Save Current Session" })
+vim.keymap.set("n", "<leader>sS", function() require("persistence").select() end, { desc = "Select a session to load" })
+vim.api.nvim_create_autocmd("VimEnter", {
+	nested = true,
+	callback = function()
+		if vim.fn.argc() == 0 and not vim.g.started_with_stdin then
+			local session = persistence.current()
+			if session and vim.fn.filereadable(session) ~= 0 then
+				if vim.fn.confirm("Load last session?", "&Yes\n&No", 1) == 1 then
+					persistence.load()
+				end
+			end
+		end
+	end,
 })
 
+-- Setups
+require("actions-preview").setup({})
 require('render-markdown').setup({})
 require("which-key").setup()
 
@@ -79,8 +118,8 @@ require("mini.surround").setup(
 			highlight = 'mh',
 			replace = 'mr',
 
-			suffix_last = 'N', -- Suffix to search with "prev" method
-			suffix_next = 'n', -- Suffix to search with "next" method
+			suffix_last = 'N',
+			suffix_next = 'n',
 		},
 	})
 require("mini.pairs").setup({})
@@ -132,15 +171,23 @@ vim.keymap.set({ 'n', 'v' }, '<S-Tab>', "<CMD>BufferLineCyclePrev<CR>", { desc =
 vim.keymap.set({ 'n', 'v' }, '<leader>x', "<CMD>bd<CR>", { desc = 'Close buffer' })
 vim.keymap.set({ 'n', 'v' }, '<leader>X', "<CMD>bd!<CR>", { desc = 'Force close buffer' })
 
-
-
-
 -- Theme
 vim.cmd("set termguicolors")
 vim.cmd("set bg=dark")
 vim.cmd.colorscheme("vague")
 require('lualine').setup({
-	options = { theme = 'vague' }
+	options = {
+		theme = 'vague',
+		globalstatus = true,
+	},
+	sections = {
+		lualine_a = { 'mode' },
+		lualine_b = { 'branch', 'diff', 'diagnostics' },
+		lualine_c = { 'filename' },
+		lualine_x = { 'filetype' },
+		lualine_y = { 'progress' },
+		lualine_z = { 'location' },
+	},
 })
 
 -- LSP
@@ -216,13 +263,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local opts = { buffer = ev.buf }
 		local buf = vim.lsp.buf
 
-		vim.keymap.set({ "n", "v" }, "<leader>k", buf.hover, opts)
-		vim.keymap.set({ "n", "v" }, "gD", buf.declaration, opts)
-		vim.keymap.set({ "n", "v" }, "gd", "<CMD>Telescope lsp_definitions<CR>", opts)
-		vim.keymap.set({ "n", "v" }, "gr", "<CMD>Telescope lsp_references<CR>", opts)
-		vim.keymap.set({ "n", "v" }, "gi", "<CMD>Telescope lsp_implementations<CR>", opts)
-		vim.keymap.set({ "n", "v" }, "<leader>r", buf.rename, opts)
-		vim.keymap.set({ "n", "v" }, "<leader>a", require("actions-preview").code_actions, opts)
+		vim.keymap.set({ "n", "v" }, "<leader>k", buf.hover, vim.tbl_extend('force', opts, { desc = 'LSP Hover' }))
+		vim.keymap.set({ "n", "v" }, "gD", buf.declaration, vim.tbl_extend('force', opts, { desc = 'LSP Declaration' }))
+		vim.keymap.set({ "n", "v" }, "gd", "<CMD>Telescope lsp_definitions<CR>",
+			vim.tbl_extend('force', opts, { desc = 'LSP Definitions' }))
+		vim.keymap.set({ "n", "v" }, "gr", "<CMD>Telescope lsp_references<CR>",
+			vim.tbl_extend('force', opts, { desc = 'LSP References' }))
+		vim.keymap.set({ "n", "v" }, "gi", "<CMD>Telescope lsp_implementations<CR>",
+			vim.tbl_extend('force', opts, { desc = 'LSP Implementations' }))
+		vim.keymap.set({ "n", "v" }, "<leader>r", buf.rename, vim.tbl_extend('force', opts, { desc = 'LSP Rename' }))
+		vim.keymap.set({ "n", "v" }, "<leader>a", require("actions-preview").code_actions,
+			vim.tbl_extend('force', opts, { desc = 'LSP Code Actions' }))
 		vim.keymap.set({ "n", "v" }, "+", function()
 			buf.format({ async = true })
 		end, opts)
@@ -256,8 +307,4 @@ vim.api.nvim_create_autocmd('FileType', {
 			require('nvim-treesitter').indentexpr()
 		end
 	end,
-})
-
-require('treesitter-context').setup({
-	enable = true
 })
