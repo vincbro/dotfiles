@@ -5,33 +5,49 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, nixpkgs, ... }:
+  outputs =
+    { self, nixpkgs, ... }:
     let
-      supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
-      forEachSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
-        pkgs = import nixpkgs { inherit system; };
-      });
+      supportedSystems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
+      forEachSystem =
+        f:
+        nixpkgs.lib.genAttrs supportedSystems (
+          system:
+          f {
+            pkgs = import nixpkgs { inherit system; };
+          }
+        );
     in
     {
-      devShells = forEachSystem ({ pkgs }: {
-        default = pkgs.mkShell {
-          nativeBuildInputs = [
-	  	pkgs.nixd
-		pkgs.nil
-		pkgs.lua-language-server
-		pkgs.cargo
-		pkgs.rustc
-		pkgs.libiconv
-		pkgs.pkg-config
-          ];
+      devShells = forEachSystem (
+        { pkgs }:
+        {
+          default = pkgs.mkShell {
+            nativeBuildInputs = [
+              pkgs.nixd
+              pkgs.nil
+              pkgs.lua-language-server
+              pkgs.cargo
+              pkgs.rustc
+              pkgs.libiconv
+              pkgs.dos2unix
+              pkgs.qmk
+              pkgs.pkg-config
+              pkgs.vscode-json-languageserver
+            ];
 
-          buildInputs = [
-            pkgs.apple-sdk
-          ];
+            buildInputs = [
+              pkgs.apple-sdk
+            ];
 
-          shellHook = ''
-          '';
-        };
-      });
+            shellHook = "";
+          };
+        }
+      );
     };
 }

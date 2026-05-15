@@ -5,6 +5,7 @@ vim.opt.showtabline = 4
 vim.opt.signcolumn = "yes"
 vim.opt.cursorcolumn = false
 vim.opt.ignorecase = true
+vim.opt.wrap = false
 vim.opt.smartindent = true
 vim.opt.termguicolors = true
 vim.opt.undofile = true
@@ -223,7 +224,7 @@ require("blink.cmp").setup({
 	}
 })
 vim.lsp.enable({
-	"lua_ls", "cssls", "svelte", "tinymist", "basedpyright",
+	"lua_ls", "cssls", "svelte", "tinymist", "basedpyright", "jsonls",
 	"rust_analyzer", "clangd", "ruff",
 	"glsl_analyzer", "haskell-language-server", "hlint",
 	"intelephense", "tailwindcss", "ts_ls",
