@@ -43,6 +43,7 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-mini/mini.surround" },
 	{ src = "https://github.com/nvim-mini/mini.pairs" },
 	{ src = "https://github.com/abecodes/tabout.nvim" },
+	{ src = "https://github.com/wansmer/treesj" },
 
 	-- Git
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
@@ -210,6 +211,10 @@ end)
 vim.keymap.set({ "x", "o" }, "as", function()
 	ttos.select_textobject("@local.scope", "locals")
 end)
+
+local treesj = require("treesj")
+treesj.setup({})
+vim.keymap.set('n', '<leader>m', treesj.toggle)
 
 -- Theme
 vim.cmd("set termguicolors")
