@@ -1,0 +1,15 @@
+vim.opt.winborder = "none"
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.showtabline = 0
+vim.opt.signcolumn = "yes"
+vim.opt.cursorcolumn = false
+vim.opt.ignorecase = true
+vim.opt.wrap = false
+vim.opt.smartindent = true
+vim.opt.termguicolors = true
+vim.opt.undofile = true
+vim.opt.number = true
+vim.o.relativenumber = true
+vim.g.mapleader = " "
+vim.cmd([[hi @lsp.type.number gui=bold]])
