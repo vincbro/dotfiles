@@ -5,9 +5,7 @@ require('gitsigns').setup({})
 vim.diagnostic.config({
 	underline = true,
 	virtual_text = false,
-	virtual_lines = {
-		current_line = true
-	},
+	virtual_lines = true,
 	signs = true,
 	update_in_insert = false,
 })
@@ -76,7 +74,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set({ "n", "v" }, "gi", "<CMD>Telescope lsp_implementations<CR>",
 			vim.tbl_extend('force', opts, { desc = 'LSP Implementations' }))
 		vim.keymap.set({ "n", "v" }, "<leader>r", buf.rename, vim.tbl_extend('force', opts, { desc = 'LSP Rename' }))
-		vim.keymap.set({ "n", "v" }, "<leader>a", require("actions-preview").code_actions,
+		vim.keymap.set({ "n", "v" }, "<leader>a", buf.code_action,
 			vim.tbl_extend('force', opts, { desc = 'LSP Code Actions' }))
 		vim.keymap.set({ "n", "v" }, "+", function()
 			buf.format({ async = true })

@@ -41,6 +41,10 @@
       "rev": "82404b196e73a00b1727a91903beef5ddc319d22",
       "src": "https://github.com/j-hui/fidget.nvim"
     },
+    "fzf-lua": {
+      "rev": "988416cc782dfe28bff3f0da9b8c943b236cd86a",
+      "src": "https://github.com/ibhagwan/fzf-lua"
+    },
     "gitsigns.nvim": {
       "rev": "6d808f99bd63303646794406e270bd553ad7792e",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
@@ -70,6 +74,14 @@
       "rev": "e934b46f6471a3bd0cd37fc06d0df198b9711882",
       "src": "https://github.com/nvim-mini/mini.completion"
     },
+    "mini.extra": {
+      "rev": "eb21c1117207d3aa1ae532c666c692e94909087e",
+      "src": "https://github.com/nvim-mini/mini.extra"
+    },
+    "mini.files": {
+      "rev": "02874bc653fbecf2bee2c65441d0ebd09110f011",
+      "src": "https://github.com/nvim-mini/mini.files"
+    },
     "mini.icons": {
       "rev": "520995f1d75da0e4cc901ee95080b1ff2bc46b94",
       "src": "https://github.com/nvim-mini/mini.icons"
@@ -81,6 +93,10 @@
     "mini.pairs": {
       "rev": "42387c7fe68fc0b6e95eaf37f1bb76e7bffaa0d9",
       "src": "https://github.com/echasnovski/mini.pairs"
+    },
+    "mini.pick": {
+      "rev": "1ffba38c7221669d3da7792d4bbe1c9761075f4d",
+      "src": "https://github.com/nvim-mini/mini.pick"
     },
     "mini.snippets": {
       "rev": "8e3acd41bd7ee8f89967c83bacc93871b98a14aa",
@@ -158,6 +174,10 @@
       "rev": "506338434fec5ad19cb1f8d45bf92d66c4917393",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
+    "tiny-code-action.nvim": {
+      "rev": "0d040ed81f7953118b81cd12681fcdfcac069803",
+      "src": "https://github.com/rachartier/tiny-code-action.nvim"
+    },
     "treesj": {
       "rev": "79aedb401bbdc7e4202f7881eab5f6feb2105b0a",
       "src": "https://github.com/wansmer/treesj"
@@ -169,6 +189,10 @@
     "vague.nvim": {
       "rev": "8751181a1aa431b4e8983b0a183afef5cbc08381",
       "src": "https://github.com/vague2k/vague.nvim"
+    },
+    "vim-illuminate": {
+      "rev": "0d1e93684da00ab7c057410fecfc24f434698898",
+      "src": "https://github.com/rrethy/vim-illuminate"
     },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",

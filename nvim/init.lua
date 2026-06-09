@@ -23,15 +23,14 @@ vim.pack.add({
 
 	-- Navigation
 	{ src = "https://github.com/stevearc/oil.nvim" },
-	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
-	{ src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
+	{ src = "https://github.com/nvim-mini/mini.pick" },
+	{ src = "https://github.com/nvim-mini/mini.files" },
 	{ src = "https://github.com/max397574/better-escape.nvim" },
 	{ src = "https://github.com/ThePrimeagen/harpoon",                       version = "harpoon2" },
 
 	-- LSP & Completion
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/Saghen/blink.cmp",                           version = vim.version.range("*") },
-	{ src = "https://github.com/aznhe21/actions-preview.nvim" },
 	{ src = "https://github.com/folke/lazydev.nvim" },
 
 	-- Syntax & Highlighting
@@ -49,10 +48,10 @@ vim.pack.add({
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 
 	-- Utilities
-	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/ThePrimeagen/99" },
 	{ src = "https://github.com/folke/persistence.nvim" },
 	{ src = "https://github.com/j-hui/fidget.nvim" },
+	{ src = "https://github.com/nvim-mini/mini.extra" },
 })
 
 
@@ -103,26 +102,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
 })
 
 -- Setups
-require("actions-preview").setup({})
-require('render-markdown').setup({})
-require("better_escape").setup()
-require("fidget").setup({})
-require("tabout").setup({})
-
--- Keymaps
-vim.keymap.set({ 'n', 'v' }, 'U', '<CMD>redo<CR>', { desc = 'Redo' })
-
-vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = 'Yank to system clipboard' })
-vim.keymap.set('n', '<leader>Y', '"+Y', { desc = 'Yank line to system clipboard' })
-vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { desc = 'Paste from system clipboard' })
-vim.keymap.set({ 'n', 'v' }, '<leader>P', '"+P', { desc = 'Paste from system clipboard (before cursor)' })
-
-vim.keymap.set({ 'n', 'v' }, 'L', 'g_', { desc = "Select to end of line" })
-vim.keymap.set({ 'n', 'v' }, 'H', '^', { desc = "Select to start of line" })
-vim.keymap.set({ 'n', 'v' }, 'J', '<C-d>', { noremap = true, desc = "Select half-page down" })
-vim.keymap.set({ 'n', 'v' }, 'K', '<C-u>', { noremap = true, desc = "Select half-page up" })
-
-vim.keymap.set({ 'n', 'v' }, 'M', 'm', { noremap = true, desc = "Set Mark" })
 require("mini.surround").setup(
 	{
 		highlight_duration = 500,
@@ -139,7 +118,13 @@ require("mini.surround").setup(
 		},
 	})
 require("mini.pairs").setup({})
-
+require('mini.extra').setup()
+require('render-markdown').setup({})
+require("better_escape").setup()
+require("fidget").setup({})
+require("tabout").setup({
+	ignore_beginning = false
+})
 require("oil").setup({
 	lsp_file_methods = {
 		enabled = true,
@@ -155,51 +140,39 @@ require("oil").setup({
 		border = "rounded",
 	},
 })
+
+require('mini.pick').setup()
+
+-- Keymaps
+vim.keymap.set({ 'n', 'v' }, 'U', '<CMD>redo<CR>', { desc = 'Redo' })
+
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = 'Yank to system clipboard' })
+vim.keymap.set('n', '<leader>Y', '"+Y', { desc = 'Yank line to system clipboard' })
+vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { desc = 'Paste from system clipboard' })
+vim.keymap.set({ 'n', 'v' }, '<leader>P', '"+P', { desc = 'Paste from system clipboard (before cursor)' })
+
+vim.keymap.set({ 'n', 'v' }, 'L', 'g_', { desc = "Select to end of line" })
+vim.keymap.set({ 'n', 'v' }, 'H', '^', { desc = "Select to start of line" })
+vim.keymap.set({ 'n', 'v' }, 'J', '<C-d>', { noremap = true, desc = "Select half-page down" })
+vim.keymap.set({ 'n', 'v' }, 'K', '<C-u>', { noremap = true, desc = "Select half-page up" })
+
+vim.keymap.set({ 'n', 'v' }, 'M', 'm', { noremap = true, desc = "Set Mark" })
+
+
+
 vim.keymap.set({ "n", "v" }, "<leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
-local builtin = require('telescope.builtin')
-local actions = require('telescope.actions')
-local telescope = require('telescope')
-telescope.setup({
-	defaults = {
-		mappings = {
-			i = {
-				["<Tab>"] = actions.move_selection_next,
-				["<S-Tab>"] = actions.move_selection_previous,
-			},
-			n = {
-				["<Tab>"] = actions.move_selection_next,
-				["<S-Tab>"] = actions.move_selection_previous,
-			}
-		}
-	}
-})
-telescope.load_extension("fidget")
-vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>g', builtin.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>d', function()
-	builtin.diagnostics({ bufnr = 0 })
-end, { desc = "Document Diagnostics" })
-vim.keymap.set('n', '<leader>D', builtin.diagnostics, { desc = "Workspace Diagnostics" })
-
-local harpoon = require("harpoon")
----@diagnostic disable-next-line: missing-fields
-harpoon.setup({})
-vim.keymap.set("n", "<leader>j", function() harpoon:list():add() end)
-vim.keymap.set("n", "<leader>l", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-for i = 1, 9 do
-	vim.keymap.set("n", "<leader>" .. i, function() harpoon:list():select(i) end)
-end
-vim.keymap.set("n", "<leader>0", function() harpoon:list():select(10) end)
+vim.keymap.set('n', '<leader>f', "<CMD>Pick files<CR>", { desc = 'Find files' })
+vim.keymap.set('n', '<leader>g', "<CMD>Pick grep_live<CR>", { desc = 'Live grep' })
+vim.keymap.set('n', '<leader>d', "<CMD>Pick diagnostic<CR>", { desc = 'Live grep' })
 
 local tto = require("nvim-treesitter-textobjects")
 local ttos = require("nvim-treesitter-textobjects.select")
 tto.setup({})
-vim.keymap.set({ "x", "o" }, "am", function()
+vim.keymap.set({ "x", "o" }, "af", function()
 	ttos.select_textobject("@function.outer", "textobjects")
 end)
-vim.keymap.set({ "x", "o" }, "im", function()
+vim.keymap.set({ "x", "o" }, "if", function()
 	ttos.select_textobject("@function.inner", "textobjects")
 end)
 vim.keymap.set({ "x", "o" }, "ac", function()
@@ -213,7 +186,9 @@ vim.keymap.set({ "x", "o" }, "as", function()
 end)
 
 local treesj = require("treesj")
-treesj.setup({})
+treesj.setup({
+	use_default_keymaps = false,
+})
 vim.keymap.set('n', '<leader>m', treesj.toggle)
 
 -- Theme

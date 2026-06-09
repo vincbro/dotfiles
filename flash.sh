@@ -27,7 +27,7 @@ echo "$ADDON" >> "$KGEN_OUTPUT"
 cp "$KGEN_OUTPUT" "$KEYMAP_FILE"
 
 echo "Flashing LEFT side with Display module..."
-#qmk flash -kb "$KB" -km "$KM" -e HLC_TFT_DISPLAY=1
+qmk flash -kb "$KB" -km "$KM" -e HLC_TFT_DISPLAY=1
 echo "Done with Left :)"
 echo "Flashing RIGHT side with Encoder module..."
 qmk flash -kb "$KB" -km "$KM" -e HLC_ENCODER=1
