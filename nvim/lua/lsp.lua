@@ -9,12 +9,12 @@ vim.diagnostic.config({
 	signs = true,
 	update_in_insert = false,
 })
-require("blink.cmp").setup({
+require('blink.cmp').setup({
 	keymap = {
-		["<Tab>"] = { "select_next", "fallback" },
-		["<S-Tab>"] = { "select_prev", "fallback" },
+		['<Tab>'] = { 'select_next', 'fallback' },
+		['<S-Tab>'] = { 'select_prev', 'fallback' },
 
-		["<CR>"] = { "accept", "fallback" },
+		['<CR>'] = { 'accept', 'fallback' },
 	},
 	completion = {
 		list = {
@@ -25,19 +25,19 @@ require("blink.cmp").setup({
 	}
 })
 vim.lsp.enable({
-	"lua_ls", "cssls", "svelte", "tinymist", "basedpyright", "jsonls",
-	"rust_analyzer", "clangd", "ruff",
-	"glsl_analyzer", "haskell-language-server", "hlint",
-	"intelephense", "tailwindcss", "ts_ls",
-	"emmet_language_server", "emmet_ls", "solargraph", "zls", "pyright",
-	"nil_ls", "nixd", "zls", "taplo"
+	'lua_ls', 'cssls', 'svelte', 'tinymist', 'basedpyright', 'jsonls',
+	'rust_analyzer', 'clangd', 'ruff',
+	'glsl_analyzer', 'haskell-language-server', 'hlint',
+	'intelephense', 'tailwindcss', 'ts_ls',
+	'emmet_language_server', 'emmet_ls', 'solargraph', 'zls', 'pyright',
+	'nil_ls', 'nixd', 'zls', 'taplo'
 })
 
-vim.lsp.config("basedpyright", {
+vim.lsp.config('basedpyright', {
 	settings = {
 		basedpyright = {
 			analysis = {
-				typeCheckingMode = "basic",
+				typeCheckingMode = 'basic',
 				reportAny = false,
 				reportUnknownMemberType = false,
 				reportUnknownArgumentType = false,
@@ -46,41 +46,41 @@ vim.lsp.config("basedpyright", {
 	}
 })
 
-vim.lsp.config("rust_analyzer", {
+vim.lsp.config('rust_analyzer', {
 	settings = {
-		["rust-analyzer"] = {
+		['rust-analyzer'] = {
 			check = {
-				command = "clippy",
+				command = 'clippy',
 				extraArgs = {
-					"--",
-					"-W", "clippy::all",
+					'--',
+					'-W', 'clippy::all',
 				},
 			}
 		}
 	}
 })
 
-vim.api.nvim_create_autocmd("LspAttach", {
+vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(ev)
 		local opts = { buffer = ev.buf }
 		local buf = vim.lsp.buf
 
-		vim.keymap.set({ "n", "v" }, "<leader>k", buf.hover, vim.tbl_extend('force', opts, { desc = 'LSP Hover' }))
-		vim.keymap.set({ "n", "v" }, "gD", buf.declaration, vim.tbl_extend('force', opts, { desc = 'LSP Declaration' }))
-		vim.keymap.set({ "n", "v" }, "gd", "<CMD>Telescope lsp_definitions<CR>",
+		vim.keymap.set({ 'n', 'v' }, '<leader>k', buf.hover, vim.tbl_extend('force', opts, { desc = 'LSP Hover' }))
+		vim.keymap.set({ 'n', 'v' }, 'gD', buf.declaration, vim.tbl_extend('force', opts, { desc = 'LSP Declaration' }))
+		vim.keymap.set({ 'n', 'v' }, 'gd', '<CMD>Pick lsp scope="definition"<CR>',
 			vim.tbl_extend('force', opts, { desc = 'LSP Definitions' }))
-		vim.keymap.set({ "n", "v" }, "gr", "<CMD>Telescope lsp_references<CR>",
+		vim.keymap.set({ 'n', 'v' }, 'gr', '<CMD>Pick lsp scope="references"<CR>',
 			vim.tbl_extend('force', opts, { desc = 'LSP References' }))
-		vim.keymap.set({ "n", "v" }, "gi", "<CMD>Telescope lsp_implementations<CR>",
+		vim.keymap.set({ 'n', 'v' }, 'gi', '<CMD>Pick lsp scope="implementation"<CR>',
 			vim.tbl_extend('force', opts, { desc = 'LSP Implementations' }))
-		vim.keymap.set({ "n", "v" }, "<leader>r", buf.rename, vim.tbl_extend('force', opts, { desc = 'LSP Rename' }))
-		vim.keymap.set({ "n", "v" }, "<leader>a", buf.code_action,
+		vim.keymap.set({ 'n', 'v' }, '<leader>r', buf.rename, vim.tbl_extend('force', opts, { desc = 'LSP Rename' }))
+		vim.keymap.set({ 'n', 'v' }, '<leader>a', buf.code_action,
 			vim.tbl_extend('force', opts, { desc = 'LSP Code Actions' }))
-		vim.keymap.set({ "n", "v" }, "+", function()
+		vim.keymap.set({ 'n', 'v' }, '+', function()
 			buf.format({ async = true })
 		end, opts)
 
-		vim.api.nvim_create_autocmd("BufWritePre", {
+		vim.api.nvim_create_autocmd('BufWritePre', {
 			buffer = ev.buf,
 			callback = function()
 				vim.lsp.buf.format({
@@ -93,7 +93,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- Tree sitter
-require('nvim-treesitter.install').compilers = { "clang" }
+require('nvim-treesitter.install').compilers = { 'clang' }
 vim.api.nvim_create_autocmd('FileType', {
 	callback = function(ev)
 		local lang = vim.treesitter.language.get_lang(ev.match)
@@ -111,7 +111,7 @@ vim.api.nvim_create_autocmd('FileType', {
 	end,
 })
 -- Tree sitter
-require('nvim-treesitter.install').compilers = { "clang" }
+require('nvim-treesitter.install').compilers = { 'clang' }
 vim.api.nvim_create_autocmd('FileType', {
 	callback = function(ev)
 		local lang = vim.treesitter.language.get_lang(ev.match)

@@ -1,94 +1,72 @@
-require("options")
+require('options')
 
 vim.pack.add({
 	-- UI & Theme
-	{ src = "https://github.com/zenbones-theme/zenbones.nvim" },
-	{ src = "https://github.com/rktjmp/lush.nvim" },
-	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
-	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
+	{ src = 'https://github.com/zenbones-theme/zenbones.nvim' },
+	{ src = 'https://github.com/rktjmp/lush.nvim' },
+	{ src = 'https://github.com/nvim-tree/nvim-web-devicons' },
+	{ src = 'https://github.com/nvim-lualine/lualine.nvim' },
 
 	-- Navigation
-	{ src = "https://github.com/stevearc/oil.nvim" },
-	{ src = "https://github.com/nvim-mini/mini.pick" },
-	{ src = "https://github.com/nvim-mini/mini.files" },
-	{ src = "https://github.com/max397574/better-escape.nvim" },
-	{ src = "https://github.com/ThePrimeagen/harpoon",                       version = "harpoon2" },
+	{ src = 'https://github.com/stevearc/oil.nvim' },
+	{ src = 'https://github.com/nvim-mini/mini.pick' },
+	{ src = 'https://github.com/nvim-mini/mini.files' },
+	{ src = 'https://github.com/cbochs/grapple.nvim' },
+	{ src = 'https://github.com/max397574/better-escape.nvim' },
 
 	-- LSP & Completion
-	{ src = "https://github.com/neovim/nvim-lspconfig" },
-	{ src = "https://github.com/Saghen/blink.cmp",                           version = vim.version.range("*") },
-	{ src = "https://github.com/folke/lazydev.nvim" },
+	{ src = 'https://github.com/neovim/nvim-lspconfig' },
+	{ src = 'https://github.com/Saghen/blink.cmp',                           version = vim.version.range('*') },
+	{ src = 'https://github.com/folke/lazydev.nvim' },
 
 	-- Syntax & Highlighting
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
-	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
+	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
+	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects' },
+	{ src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' },
 
 	-- Editing & Keymaps
-	{ src = "https://github.com/nvim-mini/mini.surround" },
-	{ src = "https://github.com/nvim-mini/mini.pairs" },
-	{ src = "https://github.com/abecodes/tabout.nvim" },
-	{ src = "https://github.com/wansmer/treesj" },
+	{ src = 'https://github.com/nvim-mini/mini.surround' },
+	{ src = 'https://github.com/nvim-mini/mini.pairs' },
+	{ src = 'https://github.com/abecodes/tabout.nvim' },
+	{ src = 'https://github.com/wansmer/treesj' },
 
 	-- Git
-	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
+	{ src = 'https://github.com/lewis6991/gitsigns.nvim' },
 
 	-- Utilities
-	{ src = "https://github.com/ThePrimeagen/99" },
-	{ src = "https://github.com/folke/persistence.nvim" },
-	{ src = "https://github.com/j-hui/fidget.nvim" },
-	{ src = "https://github.com/nvim-mini/mini.extra" },
+	{ src = 'https://github.com/ThePrimeagen/99' },
+	{ src = 'https://github.com/nvim-mini/mini.sessions' },
+	{ src = 'https://github.com/j-hui/fidget.nvim' },
+	{ src = 'https://github.com/nvim-mini/mini.extra' },
 })
 
 
 -- 99
-local _99 = require("99")
+local _99 = require('99')
 _99.setup({
 	provider = _99.Providers.GeminiCLIProvider,
-	-- model = "gemini-3.1-pro-preview",
-	model = "auto",
-	tmp_dir = "./.tmp",
+	-- model = 'gemini-3.1-pro-preview',
+	model = 'auto',
+	tmp_dir = './.tmp',
 	completion = {
 		custom_rules = {
-			vim.fn.expand("~/Documents/skills/"),
+			vim.fn.expand('~/Documents/skills/'),
 		},
 	}
 
 })
-vim.keymap.set("v", "<leader>q", function()
+vim.keymap.set('v', '<leader>q', function()
 	_99.visual({})
 end, { desc = 'Query 99' })
-vim.keymap.set({ "n", "v" }, "<leader>9x", function()
+vim.keymap.set({ 'n', 'v' }, '<leader>9x', function()
 	_99.stop_all_requests()
 end, { desc = 'Kill all 99 requests' })
-vim.keymap.set("n", "<leader>9s", function()
+vim.keymap.set('n', '<leader>9s', function()
 	_99.search({})
 end, { desc = 'Search 99' })
 
--- Persistence
-local persistence = require("persistence")
-persistence.setup()
-vim.keymap.set("n", "<leader>ss", function() persistence.load() end, { desc = "Restore Session" })
-vim.keymap.set("n", "<leader>sl", function() persistence.load({ last = true }) end,
-	{ desc = "Restore Last Session" })
-vim.keymap.set("n", "<leader>sd", function() persistence.stop() end, { desc = "Don't Save Current Session" })
-vim.keymap.set("n", "<leader>sS", function() require("persistence").select() end, { desc = "Select a session to load" })
-vim.api.nvim_create_autocmd("VimEnter", {
-	nested = true,
-	callback = function()
-		if vim.fn.argc() == 0 and not vim.g.started_with_stdin then
-			local session = persistence.current()
-			if session and vim.fn.filereadable(session) ~= 0 then
-				if vim.fn.confirm("Load last session?", "&Yes\n&No", 1) == 1 then
-					persistence.load()
-				end
-			end
-		end
-	end,
-})
-
 -- Setups
-require("mini.surround").setup(
+require('mini.surround').setup(
 	{
 		highlight_duration = 500,
 		mappings = {
@@ -103,67 +81,85 @@ require("mini.surround").setup(
 			suffix_next = 'n',
 		},
 	})
-require("mini.pairs").setup({})
-require('mini.extra').setup()
-require('render-markdown').setup({})
-require("better_escape").setup()
-require("fidget").setup({})
-require("tabout").setup({
-	ignore_beginning = false
+require('mini.sessions').setup({
+	autoread = true
 })
-require("oil").setup({
-	lsp_file_methods = {
-		enabled = true,
-		timeout_ms = 1000,
-		autosave_changes = true,
+require('mini.pairs').setup({})
+require('mini.extra').setup()
+local mf = require('mini.files')
+mf.setup({
+	mappings = {
+		synchronize = '+'
+
 	},
-	columns = {
-		"icon",
-	},
-	float = {
-		max_width = 0.3,
-		max_height = 0.6,
-		border = "rounded",
-	},
+})
+
+vim.api.nvim_create_autocmd('User', {
+	pattern = 'MiniFilesExplorerOpen',
+	callback = function()
+		mf.reveal_cwd()
+	end,
+})
+
+require('render-markdown').setup({})
+require('better_escape').setup()
+require('fidget').setup({})
+require('tabout').setup({
+	ignore_beginning = false
 })
 
 require('mini.pick').setup()
 
-require("keymaps")
+require('keymaps')
 
-local tto = require("nvim-treesitter-textobjects")
-local ttos = require("nvim-treesitter-textobjects.select")
+local grapple = require('grapple')
+grapple.setup({
+	scope = 'git',
+})
+
+vim.keymap.set('n', '<leader>j', grapple.toggle, { desc = 'Grapple toggle tag' })
+vim.keymap.set('n', '<leader>l', grapple.toggle_tags, { desc = 'Grapple open tags' })
+for i = 1, 9 do
+	vim.keymap.set('n', '<leader>' .. i, function()
+		grapple.select({
+			index = i,
+		})
+	end, { desc = 'Grapple select ' .. i })
+end
+
+local tto = require('nvim-treesitter-textobjects')
+local ttos = require('nvim-treesitter-textobjects.select')
 tto.setup({})
-vim.keymap.set({ "x", "o" }, "af", function()
-	ttos.select_textobject("@function.outer", "textobjects")
+vim.keymap.set({ 'x', 'o' }, 'af', function()
+	ttos.select_textobject('@function.outer', 'textobjects')
 end)
-vim.keymap.set({ "x", "o" }, "if", function()
-	ttos.select_textobject("@function.inner", "textobjects")
+vim.keymap.set({ 'x', 'o' }, 'if', function()
+	ttos.select_textobject('@function.inner', 'textobjects')
 end)
-vim.keymap.set({ "x", "o" }, "ac", function()
-	ttos.select_textobject("@class.outer", "textobjects")
+vim.keymap.set({ 'x', 'o' }, 'ac', function()
+	ttos.select_textobject('@class.outer', 'textobjects')
 end)
-vim.keymap.set({ "x", "o" }, "ic", function()
-	ttos.select_textobject("@class.inner", "textobjects")
+vim.keymap.set({ 'x', 'o' }, 'ic', function()
+	ttos.select_textobject('@class.inner', 'textobjects')
 end)
-vim.keymap.set({ "x", "o" }, "as", function()
-	ttos.select_textobject("@local.scope", "locals")
+vim.keymap.set({ 'x', 'o' }, 'as', function()
+	ttos.select_textobject('@local.scope', 'locals')
 end)
 
-local treesj = require("treesj")
+local treesj = require('treesj')
 treesj.setup({
 	use_default_keymaps = false,
 })
 vim.keymap.set('n', '<leader>m', treesj.toggle)
 
 -- Theme
-vim.cmd("set termguicolors")
-vim.cmd("set bg=dark")
-vim.cmd.colorscheme("zenwritten")
+vim.cmd('set termguicolors')
+vim.cmd('set bg=dark')
+vim.cmd.colorscheme('zenwritten')
 require('lualine').setup({
 	options = {
-		component_separators = "",
-		section_separators = "",
+		component_separators = '',
+		section_separators = '',
 		theme = 'zenwritten',
 		globalstatus = true,
 	},
@@ -177,4 +173,4 @@ require('lualine').setup({
 	},
 })
 
-require("lsp")
+require('lsp')

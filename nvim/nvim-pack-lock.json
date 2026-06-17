@@ -49,6 +49,10 @@
       "rev": "6d808f99bd63303646794406e270bd553ad7792e",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
+    "grapple.nvim": {
+      "rev": "b41ddfc1c39f87f3d1799b99c2f0f1daa524c5f7",
+      "src": "https://github.com/cbochs/grapple.nvim"
+    },
     "harpoon": {
       "rev": "87b1a3506211538f460786c23f98ec63ad9af4e5",
       "src": "https://github.com/ThePrimeagen/harpoon",
@@ -97,6 +101,10 @@
     "mini.pick": {
       "rev": "1ffba38c7221669d3da7792d4bbe1c9761075f4d",
       "src": "https://github.com/nvim-mini/mini.pick"
+    },
+    "mini.sessions": {
+      "rev": "e59286b20fbf61171039ddfebc736cf9562e75d5",
+      "src": "https://github.com/nvim-mini/mini.sessions"
     },
     "mini.snippets": {
       "rev": "8e3acd41bd7ee8f89967c83bacc93871b98a14aa",
