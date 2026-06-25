@@ -3,4 +3,5 @@
 /raycast
 /.tmp
 .zshrc
+/opencode/node_modules
 Session.vim

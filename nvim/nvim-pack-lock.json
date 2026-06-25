@@ -150,6 +150,10 @@
       "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",
       "src": "https://github.com/stevearc/oil.nvim"
     },
+    "opencode.nvim": {
+      "rev": "97c90dd0936c9076cbe78d8f94c7a2d119509d2c",
+      "src": "https://github.com/nickjvandyke/opencode.nvim"
+    },
     "persistence.nvim": {
       "rev": "b20b2a7887bd39c1a356980b45e03250f3dce49c",
       "src": "https://github.com/folke/persistence.nvim"

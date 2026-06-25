@@ -8,9 +8,8 @@ vim.pack.add({
 	{ src = 'https://github.com/nvim-lualine/lualine.nvim' },
 
 	-- Navigation
-	{ src = 'https://github.com/stevearc/oil.nvim' },
 	{ src = 'https://github.com/nvim-mini/mini.pick' },
-	{ src = 'https://github.com/nvim-mini/mini.files' },
+	{ src = 'https://github.com/stevearc/oil.nvim' },
 	{ src = 'https://github.com/cbochs/grapple.nvim' },
 	{ src = 'https://github.com/max397574/better-escape.nvim' },
 
@@ -34,36 +33,10 @@ vim.pack.add({
 	{ src = 'https://github.com/lewis6991/gitsigns.nvim' },
 
 	-- Utilities
-	{ src = 'https://github.com/ThePrimeagen/99' },
 	{ src = 'https://github.com/nvim-mini/mini.sessions' },
 	{ src = 'https://github.com/j-hui/fidget.nvim' },
 	{ src = 'https://github.com/nvim-mini/mini.extra' },
 })
-
-
--- 99
-local _99 = require('99')
-_99.setup({
-	provider = _99.Providers.GeminiCLIProvider,
-	-- model = 'gemini-3.1-pro-preview',
-	model = 'auto',
-	tmp_dir = './.tmp',
-	completion = {
-		custom_rules = {
-			vim.fn.expand('~/Documents/skills/'),
-		},
-	}
-
-})
-vim.keymap.set('v', '<leader>q', function()
-	_99.visual({})
-end, { desc = 'Query 99' })
-vim.keymap.set({ 'n', 'v' }, '<leader>9x', function()
-	_99.stop_all_requests()
-end, { desc = 'Kill all 99 requests' })
-vim.keymap.set('n', '<leader>9s', function()
-	_99.search({})
-end, { desc = 'Search 99' })
 
 -- Setups
 require('mini.surround').setup(
@@ -86,21 +59,7 @@ require('mini.sessions').setup({
 })
 require('mini.pairs').setup({})
 require('mini.extra').setup()
-local mf = require('mini.files')
-mf.setup({
-	mappings = {
-		synchronize = '+'
-
-	},
-})
-
-vim.api.nvim_create_autocmd('User', {
-	pattern = 'MiniFilesExplorerOpen',
-	callback = function()
-		mf.reveal_cwd()
-	end,
-})
-
+require('oil').setup({})
 require('render-markdown').setup({})
 require('better_escape').setup()
 require('fidget').setup({})
@@ -156,21 +115,21 @@ vim.keymap.set('n', '<leader>m', treesj.toggle)
 vim.cmd('set termguicolors')
 vim.cmd('set bg=dark')
 vim.cmd.colorscheme('zenwritten')
-require('lualine').setup({
-	options = {
-		component_separators = '',
-		section_separators = '',
-		theme = 'zenwritten',
-		globalstatus = true,
-	},
-	sections = {
-		lualine_a = { 'mode' },
-		lualine_b = { 'branch', 'diff', 'diagnostics' },
-		lualine_c = { 'filename' },
-		lualine_x = { 'filetype' },
-		lualine_y = { 'progress' },
-		lualine_z = { 'location' },
-	},
-})
+-- require('lualine').setup({
+-- 	options = {
+-- 		component_separators = '',
+-- 		section_separators = '',
+-- 		theme = 'zenwritten',
+-- 		globalstatus = true,
+-- 	},
+-- 	sections = {
+-- 		lualine_a = { 'mode' },
+-- 		lualine_b = { 'branch', 'diff', 'diagnostics' },
+-- 		lualine_c = { 'filename' },
+-- 		lualine_x = { 'filetype' },
+-- 		lualine_y = { 'progress' },
+-- 		lualine_z = { 'location' },
+-- 	},
+-- })
 
 require('lsp')

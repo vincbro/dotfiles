@@ -12,12 +12,7 @@ vim.keymap.set({ 'n', 'v' }, 'K', '<C-u>', { noremap = true, desc = 'Select half
 
 vim.keymap.set({ 'n', 'v' }, 'M', 'm', { noremap = true, desc = 'Set Mark' })
 
-vim.keymap.set({ 'n', 'v' }, '<leader>e',
-	function()
-		local current_file = vim.api.nvim_buf_get_name(0)
-		MiniFiles.open(current_file)
-	end
-	, { desc = 'Open parent directory' })
+vim.keymap.set({ 'n', 'v' }, '<leader>e', "<CMD>Oil<CR>", { desc = 'Open parent directory' })
 
 vim.keymap.set('n', '<leader>f', '<CMD>Pick files<CR>', { desc = 'Find files' })
 vim.keymap.set('n', '<leader>g', '<CMD>Pick grep_live<CR>', { desc = 'Live grep' })

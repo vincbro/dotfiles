@@ -1,4 +1,5 @@
-font-family = Menlo 
+# font-family = Menlo 
+font-family = Monaspace Neon 
 font-size = 22 
 theme = Zenwritten Dark
 macos-option-as-alt = left
