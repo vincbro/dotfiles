@@ -1,75 +1,22 @@
 {
-  "$schema": "https://opencode.ai/config.json",
-  "provider": {
-    "openrouter": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "OpenRouter",
-      "options": {
-        "baseURL": "https://openrouter.ai/api/v1",
-        "apiKey": "{env:OR_KEY}"
-      }
-    }
-  },
-  "agent": {
-    "build": {
-      "disable": true
-    },
-    "plan": {
-      "disable": true
-    },
-    "planner": {
-      "description": "Heavy model for detailed planning and complex problem analysis. Use todowrite to create task lists, question to ask for clarification, task to delegate work to subagents like @doc-reader, and read/grep/glob for codebase exploration. When the plan is ready, notify the user to switch to the executor agent for implementation.",
-      "model": "zai-coding-plan/glm-5.2",
-      "mode": "primary",
-      "prompt": "You are a detailed planner. Break down complex tasks into step-by-step implementation plans. Consider the Planner-Executor framework. Use the `todowrite` tool to create structured task lists that track progress. When you need clarification or user input about requirements, preferences, or constraints, use the `question` tool to ask explicitly before making assumptions. Delegate documentation research to @doc-reader using the `task` tool. Explore the codebase using `read`, `grep`, and `glob` tools to understand context before planning.\n\nWhen your planning is complete and you have a detailed, actionable plan ready for implementation, explicitly notify the user that the plan is ready and suggest they switch to the executor agent (using Tab or your configured switch agent keybind) to begin implementation. Do NOT attempt to implement the plan yourself - you are read-only and designed for planning only.",
-      "permission": {
-        "read": "allow",
-        "grep": "allow",
-        "glob": "allow",
-        "webfetch": "allow",
-        "websearch": "allow",
-        "question": "allow",
-        "skill": "allow",
-        "todowrite": "allow",
-        "lsp": "allow",
-        "edit": "deny",
-        "bash": "deny"
-      }
-    },
-    "executor": {
-      "description": "Lighter model for implementation following existing plans. Use todowrite to track implementation progress, question to ask for direction when stuck, and all file/bash tools for implementation work.",
-      "model": "zai-coding-plan/glm-4.5-air",
-      "mode": "primary",
-      "prompt": "You are an executor agent. Follow the provided plan precisely. Use the `todowrite` tool to track implementation progress and mark tasks as complete. When you encounter detailed problems or ambiguity, use the `question` tool to ask the user for direction before making assumptions. Never fabricate solutions or deviate from the plan. Use `read`, `grep`, and `glob` to understand code structure, `edit` and `write` for file modifications, and `bash` for running commands. Follow project conventions and coding standards.",
-      "permission": {
-        "*": "allow"
-      }
-    },
-    "doc-reader": {
-      "description": "Specialized subagent for reading and understanding project documentation. Use read/grep/glob/webfetch to find and analyze documentation, lsp for code understanding, and question to clarify what information is needed.",
-      "model": "zai-coding-plan/glm-4.5-air",
-      "mode": "subagent",
-      "prompt": "You are a documentation specialist. Read and understand project docs thoroughly. Always start by reading /target/doc for local API documentation before suggesting changes. Use `read`, `grep`, and `glob` to find relevant documentation, `webfetch` and `websearch` for external research, and `lsp` for code understanding. Use the `question` tool to clarify what specific information is needed. Extract key information accurately and reference specific sections when relevant. You have read access to all files but cannot modify anything.",
-      "permission": {
-        "read": "allow",
-        "grep": "allow",
-        "glob": "allow",
-        "webfetch": "allow",
-        "websearch": "allow",
-        "question": "allow",
-        "skill": "allow",
-        "lsp": "allow",
-        "edit": "deny",
-        "bash": "deny"
-      }
-    }
-  },
-  "default_agent": "executor",
-  "command": {
-    "plan": {
-      "template": "Create a detailed implementation plan for: $ARGUMENTS\nConsider the Planner-Executor framework.",
-      "description": "Create a detailed plan",
-      "agent": "planner"
-    }
-  }
+	"$schema": "https://opencode.ai/config.json",
+	"provider": {
+		"openrouter": {
+			"npm": "@ai-sdk/openai-compatible",
+			"name": "OpenRouter",
+			"options": {
+				"baseURL": "https://openrouter.ai/api/v1",
+				"apiKey": "{env:OR_KEY}"
+			}
+		}
+	},
+	"agent": {
+		"build": {
+			"disable": true
+		},
+		"plan": {
+			"disable": true
+		}
+	},
+	"default_agent": "planner"
 }
