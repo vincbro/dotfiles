@@ -2,10 +2,19 @@ require('options')
 
 vim.pack.add({
 	-- UI & Theme
-	{ src = 'https://github.com/zenbones-theme/zenbones.nvim' },
+	{ src = 'https://github.com/vague-theme/vague.nvim' },
+	{ src = "https://github.com/alexvzyl/nordic.nvim" },
+	{ src = "https://github.com/cocopon/iceberg.vim" },
+	{ src = "https://github.com/savq/melange-nvim" },
+	{ src = "https://github.com/rose-pine/neovim" },
+	{ src = "https://github.com/zenbones-theme/zenbones.nvim" },
+	{ src = "https://github.com/ramojus/mellifluous.nvim" },
+
 	{ src = 'https://github.com/rktjmp/lush.nvim' },
-	{ src = 'https://github.com/nvim-tree/nvim-web-devicons' },
-	{ src = 'https://github.com/nvim-lualine/lualine.nvim' },
+	{ src = 'https://github.com/nvim-mini/mini.icons' },
+	{ src = 'https://github.com/nvim-mini/mini.statusline' },
+	{ src = 'https://github.com/folke/snacks.nvim' },
+
 
 	-- Navigation
 	{ src = 'https://github.com/nvim-mini/mini.pick' },
@@ -36,9 +45,24 @@ vim.pack.add({
 	{ src = 'https://github.com/nvim-mini/mini.sessions' },
 	{ src = 'https://github.com/j-hui/fidget.nvim' },
 	{ src = 'https://github.com/nvim-mini/mini.extra' },
+	{ src = 'https://github.com/shortcuts/no-neck-pain.nvim' },
+	{ src = 'https://github.com/folke/twilight.nvim' },
+	{ src = 'https://github.com/nvim-mini/mini.indentscope' },
 })
 
 -- Setups
+require('no-neck-pain').setup({
+	width = 80,
+	autocmds = {
+		enableOnVimEnter = false,
+	},
+	mappings = {
+		enabled = true,
+		scratchPad = false,
+	},
+})
+
+require('mini.indentscope').setup()
 require('mini.surround').setup(
 	{
 		highlight_duration = 500,
@@ -54,20 +78,56 @@ require('mini.surround').setup(
 			suffix_next = 'n',
 		},
 	})
+
+local function keep_single_center_window()
+	for _, win in ipairs(vim.api.nvim_list_wins()) do
+		if vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= 'no-neck-pain' then
+			vim.api.nvim_set_current_win(win)
+			break
+		end
+	end
+	pcall(vim.cmd, 'only')
+end
+
 require('mini.sessions').setup({
-	autoread = true
+	autoread = true,
+	hooks = {
+		pre = { write = keep_single_center_window },
+		post = {
+			read = function()
+				keep_single_center_window()
+				require('no-neck-pain').enable()
+			end,
+		},
+	},
+})
+
+vim.api.nvim_create_autocmd('VimEnter', {
+	once = true,
+	callback = function()
+		vim.schedule(function()
+			if vim.v.this_session == '' then
+				require('no-neck-pain').enable()
+			end
+		end)
+	end,
 })
 require('mini.pairs').setup({})
+require('mini.statusline').setup({})
+local icons = require('mini.icons')
+icons.setup({})
+icons.mock_nvim_web_devicons()
 require('mini.extra').setup()
 require('oil').setup({})
 require('render-markdown').setup({})
-require('better_escape').setup()
 require('fidget').setup({})
 require('tabout').setup({
 	ignore_beginning = false
 })
 
 require('mini.pick').setup()
+
+require('twilight').setup({})
 
 require('keymaps')
 
@@ -114,22 +174,9 @@ vim.keymap.set('n', '<leader>m', treesj.toggle)
 -- Theme
 vim.cmd('set termguicolors')
 vim.cmd('set bg=dark')
-vim.cmd.colorscheme('zenwritten')
--- require('lualine').setup({
--- 	options = {
--- 		component_separators = '',
--- 		section_separators = '',
--- 		theme = 'zenwritten',
--- 		globalstatus = true,
--- 	},
--- 	sections = {
--- 		lualine_a = { 'mode' },
--- 		lualine_b = { 'branch', 'diff', 'diagnostics' },
--- 		lualine_c = { 'filename' },
--- 		lualine_x = { 'filetype' },
--- 		lualine_y = { 'progress' },
--- 		lualine_z = { 'location' },
--- 	},
--- })
+vim.cmd.colorscheme('iceberg')
+
+
+require('better_escape').setup()
 
 require('lsp')

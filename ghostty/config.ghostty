@@ -1,7 +1,7 @@
 # font-family = Menlo 
 font-family = Monaspace Neon 
 font-size = 22 
-theme = Zenwritten Dark
+theme = Iceberg Dark 
 macos-option-as-alt = left
 mouse-hide-while-typing = true
 macos-titlebar-style = hidden

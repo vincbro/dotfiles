@@ -1,0 +1,7 @@
+// GENERATED FROM KGEN
+
+#pragma once
+
+#define CHORDAL_HOLD
+#define RETRO_TAPPING
+#define TAPPING_TERM 200

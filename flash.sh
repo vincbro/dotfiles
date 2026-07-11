@@ -8,12 +8,13 @@ for arg in "$@"; do
     fi
 done
 
-KB=$(ls kgen | sk --prompt="Select keyboard> ")
+KB=$(find kgen -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | sk --prompt="Select keyboard> ")
 
 USERSPACE_ROOT="$HOME/Documents/projects/qmk_userspace"
 KGEN_ROOT="kgen/$KB"
 KGEN_OUTPUT="$KGEN_ROOT/output.c"
 KEYMAP_FILE="$HOME/Documents/projects/qmk_userspace/keyboards/splitkb/halcyon/elora/keymaps/default_hlc/keymap.c"
+CONFIG_FILE="$HOME/Documents/projects/qmk_userspace/keyboards/splitkb/halcyon/elora/keymaps/default_hlc/config.h"
 KB="splitkb/halcyon/elora/rev2"
 KM="default_hlc"
 
@@ -33,6 +34,7 @@ kgen build -p "$KGEN_ROOT" -m qmk -o "$KGEN_OUTPUT"
 echo "$ADDON" >> "$KGEN_OUTPUT"
 
 cp "$KGEN_OUTPUT" "$KEYMAP_FILE"
+cp "$KGEN_ROOT/config.h" "$CONFIG_FILE"
 
 if [ "$NOOP" = true ]; then
     echo "NOOP mode: compiling keymap without flashing..."

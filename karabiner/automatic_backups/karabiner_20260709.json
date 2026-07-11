@@ -62,14 +62,6 @@
                         "vendor_id": 5426
                     },
                     "ignore": true
-                },
-                {
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "product_id": 24882,
-                        "vendor_id": 6127
-                    },
-                    "ignore": true
                 }
             ],
             "name": "Default profile",

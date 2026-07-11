@@ -13,3 +13,8 @@ layers = ["BASE", "NAV", "SYM"]
 [format]
 padding = 2
 
+[config.features.chordal_hold]
+enabled = true
+mode = "none"
+tapping_term = 200
+retro_tapping = true    

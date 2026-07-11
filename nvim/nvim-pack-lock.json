@@ -62,6 +62,10 @@
       "rev": "958314b6210d93d1abd4b1bc23b06a69fd17e3e9",
       "src": "https://github.com/chtenb/helix.vim"
     },
+    "iceberg.vim": {
+      "rev": "23835d5ed696436f716cbfdb56a93a7850fe3b18",
+      "src": "https://github.com/cocopon/iceberg.vim"
+    },
     "lazydev.nvim": {
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "https://github.com/folke/lazydev.nvim"
@@ -73,6 +77,14 @@
     "lush.nvim": {
       "rev": "9c60ec2279d62487d942ce095e49006af28eed6e",
       "src": "https://github.com/rktjmp/lush.nvim"
+    },
+    "melange-nvim": {
+      "rev": "ce42f6b629beeaa00591ba73a77d3eeac4cf28ce",
+      "src": "https://github.com/savq/melange-nvim"
+    },
+    "mellifluous.nvim": {
+      "rev": "ec0575bdb63594c5e7fba6eb9607b009aa1fb74e",
+      "src": "https://github.com/ramojus/mellifluous.nvim"
     },
     "mini.completion": {
       "rev": "e934b46f6471a3bd0cd37fc06d0df198b9711882",
@@ -89,6 +101,10 @@
     "mini.icons": {
       "rev": "520995f1d75da0e4cc901ee95080b1ff2bc46b94",
       "src": "https://github.com/nvim-mini/mini.icons"
+    },
+    "mini.indentscope": {
+      "rev": "92fbaf895f83c59575ec599df532b297ebf62b14",
+      "src": "https://github.com/nvim-mini/mini.indentscope"
     },
     "mini.nvim": {
       "rev": "11afe78a10570fe1d0c7ed0b6fc2b5b19098cb45",
@@ -110,9 +126,25 @@
       "rev": "8e3acd41bd7ee8f89967c83bacc93871b98a14aa",
       "src": "https://github.com/nvim-mini/mini.snippets"
     },
+    "mini.statusline": {
+      "rev": "6a136236ec93090c820c1d2a6139aa053b2199c9",
+      "src": "https://github.com/nvim-mini/mini.statusline"
+    },
     "mini.surround": {
       "rev": "2715e04bea3ec9244f15b421dc5b18c0fe326210",
       "src": "https://github.com/nvim-mini/mini.surround"
+    },
+    "neovim": {
+      "rev": "ff483051a47e27d84bdef47703538df1ed9f4a47",
+      "src": "https://github.com/rose-pine/neovim"
+    },
+    "no-neck-pain.nvim": {
+      "rev": "4bc52782524fd50c5658685d584df6fa48fe49f9",
+      "src": "https://github.com/shortcuts/no-neck-pain.nvim"
+    },
+    "nordic.nvim": {
+      "rev": "9fb62116b891184049c50ca6ffb0d3bc100a1a6e",
+      "src": "https://github.com/alexvzyl/nordic.nvim"
     },
     "nvim-cmp": {
       "rev": "a1d504892f2bc56c2e79b65c6faded2fd21f3eca",
@@ -197,6 +229,10 @@
     "ts-autotag.nvim": {
       "rev": "35f79f6253dff5cc43cf943d74c4b2734370a81d",
       "src": "https://github.com/tronikelis/ts-autotag.nvim"
+    },
+    "twilight.nvim": {
+      "rev": "664e752f4a219801265cc3fc18782b457b58c1e1",
+      "src": "https://github.com/folke/twilight.nvim"
     },
     "vague.nvim": {
       "rev": "8751181a1aa431b4e8983b0a183afef5cbc08381",

@@ -12,10 +12,12 @@
 	},
 	"agent": {
 		"build": {
-			"disable": true
+			"model": "zai-coding-plan/glm-4.5-air",
+			"color": "#22dd5c"
 		},
 		"plan": {
-			"disable": true
+			"model": "zai-coding-plan/glm-5.2",
+			"color": "#ec1332"
 		}
 	},
 	"default_agent": "planner"
