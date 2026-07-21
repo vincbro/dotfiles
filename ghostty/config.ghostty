@@ -1,7 +1,13 @@
 # font-family = Menlo 
 font-family = Monaspace Neon 
 font-size = 22 
-theme = Iceberg Dark 
-macos-option-as-alt = left
+theme = Gruvbox Dark Hard
+
+window-padding-x = 12
+window-padding-y = 8
+window-padding-balance = true
+
 mouse-hide-while-typing = true
+
+macos-option-as-alt = left
 macos-titlebar-style = hidden
