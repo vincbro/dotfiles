@@ -6404,3 +6404,4 @@
 2026-08-07T23:52:05.819003Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w2" tab_id="w2:t3"
 2026-08-07T23:52:10.827661Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/Users/vince/.config/herdr/session.json workspaces=3
 2026-08-07T23:52:22.546742Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w2" tab_id="w2:t4"
+2026-08-07T23:52:27.554801Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/Users/vince/.config/herdr/session.json workspaces=3
