@@ -1,0 +1,127 @@
+onboarding = false
+
+[theme]
+name = "terminal"
+
+[theme.custom]
+accent = "#ebc06d"
+panel_bg = "#292522"
+surface0 = "#34302c"
+surface1 = "#403a36"
+surface_dim = "#292522"
+overlay0 = "#7b6962"
+overlay1 = "#c1a78e"
+text = "#ece1d7"
+subtext0 = "#c1a78e"
+mauve = "#b380b0"
+green = "#78997a"
+yellow = "#e49b5d"
+red = "#bd8183"
+blue = "#7f91b2"
+teal = "#7b9695"
+peach = "#e49b5d"
+
+[terminal]
+shell_mode = "auto"
+new_cwd = "follow"
+
+[keys]
+prefix = "ctrl+g"
+
+new_tab = ["prefix+c", "alt+a"]
+close_tab = ["prefix+shift+x", "alt+d"]
+focus_agent = "alt+1..9"
+
+goto = "prefix+g"
+workspace_picker = "prefix+w"
+new_workspace = ["prefix+shift+n", "alt+g"]
+new_worktree = ["prefix+shift+g", "alt+shift+g"]
+
+focus_pane_left = ["prefix+h", "alt+h"]
+focus_pane_down = ["prefix+j", "alt+j"]
+focus_pane_up = ["prefix+k", "alt+k"]
+focus_pane_right = ["prefix+l", "alt+l"]
+split_vertical = ["prefix+v", "alt+v"]
+split_horizontal = ["prefix+minus", "alt+s"]
+close_pane = ["prefix+x", "alt+x"]
+zoom = ["prefix+z", "alt+z"]
+
+help = "prefix+?"
+settings = "prefix+comma"
+detach = "prefix+q"
+reload_config = ["prefix+shift+r", "alt+shift+r"]
+toggle_sidebar = ["prefix+b", "alt+b"]
+edit_scrollback = "prefix+e"
+copy_mode = "prefix+["
+resize_mode = "prefix+r"
+
+[[keys.command]]
+key = "alt+f"
+type = "popup"
+command = "/Users/vince/dotfiles/scripts/herdr-session.sh"
+description = "open project workspace picker"
+width = "80%"
+height = "80%"
+
+[[keys.command]]
+key = "alt+q"
+type = "shell"
+command = "/Users/vince/dotfiles/scripts/herdr-tab.sh 1"
+
+[[keys.command]]
+key = "alt+w"
+type = "shell"
+command = "/Users/vince/dotfiles/scripts/herdr-tab.sh 2"
+
+[[keys.command]]
+key = "alt+e"
+type = "shell"
+command = "/Users/vince/dotfiles/scripts/herdr-tab.sh 3"
+
+[[keys.command]]
+key = "alt+r"
+type = "shell"
+command = "/Users/vince/dotfiles/scripts/herdr-tab.sh 4"
+
+[[keys.command]]
+key = "alt+t"
+type = "shell"
+command = "/Users/vince/dotfiles/scripts/herdr-tab.sh 5"
+
+[[keys.command]]
+key = "alt+y"
+type = "shell"
+command = "/Users/vince/dotfiles/scripts/herdr-tab.sh 6"
+
+[[keys.command]]
+key = "alt+u"
+type = "shell"
+command = "/Users/vince/dotfiles/scripts/herdr-tab.sh 7"
+
+[[keys.command]]
+key = "alt+i"
+type = "shell"
+command = "/Users/vince/dotfiles/scripts/herdr-tab.sh 8"
+
+[[keys.command]]
+key = "alt+o"
+type = "shell"
+command = "/Users/vince/dotfiles/scripts/herdr-tab.sh 9"
+
+[[keys.command]]
+key = "alt+p"
+type = "shell"
+command = "/Users/vince/dotfiles/scripts/herdr-tab.sh 10"
+
+[ui]
+prompt_new_tab_name = false
+show_agent_labels_on_pane_borders = false
+pane_borders = true 
+pane_gaps = true 
+
+agent_panel_sort = "spaces"
+[session]
+resume_agents_on_restore = true
+
+[advanced]
+scrollback_limit_bytes = 10000000

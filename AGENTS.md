@@ -16,7 +16,8 @@ Personal **dotfiles / tooling-config collection** for macOS (darwin). Not an app
 - `kgen/` — keymap-generator sources per keyboard (`elora/`, `ferris/`); consumed by `flash.sh`.
 - `nvim/` — Neovim (`init.lua`, `lua/`).
 - `opencode/` — **this repo's own OpenCode config** (see below).
-- `scripts/` — shell helpers; `tmux-session.sh` needs `fd` + `sk` (skim).
+- `scripts/` — shell helpers; the tmux/Zellij session pickers need `fd` + `sk` (skim).
+- `zellij/` — Zellij terminal workspace: `config.kdl`, `layouts/`.
 - root: `.tmux.conf`, `.zshrc`, `.envrc`, `flake.nix`, `flash.sh`.
 
 ## OpenCode config (meta — this repo configures itself)

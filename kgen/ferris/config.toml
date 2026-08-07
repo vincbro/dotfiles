@@ -2,19 +2,19 @@
 layout = [
 	"#####     #####",
 	"#####     #####",
-	"####### #######",
-	"   ##### #####   ",
-	"#####       #####",
+	"#####     #####",
+	"   ##     ##   ",
 ]
 layers = ["BASE", "NAV", "SYM"]
 
+[config.qmk]
+  preset = "ferris_sweep"
 
 [format]
 padding = 2 
 
 [config.features.chordal_hold]
 enabled = true
-mode = "none"
+mode = "permissive"
 tapping_term = 200
 retro_tapping = true
-

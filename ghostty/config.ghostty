@@ -1,7 +1,7 @@
-# font-family = Menlo 
-font-family = Monaspace Neon 
-font-size = 22 
-theme = Gruvbox Dark Hard
+font-family = CommitMono Nerd Font Mono
+font-size = 20
+font-feature = calt,liga
+theme = Melange Dark 
 
 window-padding-x = 12
 window-padding-y = 8
@@ -11,3 +11,10 @@ mouse-hide-while-typing = true
 
 macos-option-as-alt = left
 macos-titlebar-style = hidden
+
+command = direct:/Users/vince/dotfiles/scripts/ghostty-shell.sh
+
+keybind = global:cmd+backquote=toggle_quick_terminal
+quick-terminal-position = top
+quick-terminal-size = 45%
+quick-terminal-animation-duration = 0
