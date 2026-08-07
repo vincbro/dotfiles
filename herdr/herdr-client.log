@@ -94,3 +94,15 @@
 2026-08-07T13:32:16.399623Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=33004
 2026-08-07T13:32:16.399855Z  INFO herdr::client: connecting to server path=/Users/vince/.config/herdr/herdr-client.sock
 2026-08-07T13:32:16.423364Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
+2026-08-07T22:16:10.766774Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=30865
+2026-08-07T22:16:10.766935Z  INFO herdr::client: connecting to server path=/Users/vince/.config/herdr/herdr-client.sock
+2026-08-07T22:16:10.806065Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
+2026-08-07T23:02:58.425138Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=928
+2026-08-07T23:02:58.425308Z  INFO herdr::client: connecting to server path=/Users/vince/.config/herdr/herdr-client.sock
+2026-08-07T23:02:58.481555Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
+2026-08-07T23:04:11.328470Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=1857
+2026-08-07T23:04:11.328500Z  INFO herdr::client: connecting to server path=/Users/vince/.config/herdr/herdr-client.sock
+2026-08-07T23:04:11.477456Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
+2026-08-07T23:07:03.124477Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=8544
+2026-08-07T23:07:03.124501Z  INFO herdr::client: connecting to server path=/Users/vince/.config/herdr/herdr-client.sock
+2026-08-07T23:07:03.138015Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
